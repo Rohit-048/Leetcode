@@ -3,7 +3,7 @@ public:
     int myAtoi(string s) {
 
         int i = 0;
-        int sign = 1; //positive by default 
+        int sign = 1; // positive by default
         int n = s.length();
 
         // to check for leading whitespaces
@@ -20,16 +20,13 @@ public:
         while (i < n && isdigit(s[i])) {
             result = result * 10 + (s[i++] - '0');
 
-            // checking the min count is negative
-            if (result * sign < numeric_limits<int>::min()) {
-                return numeric_limits<int>::min();
-            }
-            // checking the min count is positive
-            else if (result * sign > numeric_limits<int>::max()) {
-                return numeric_limits<int>::max();
+            if (result >
+                INT_MAX) { // if it is more then int max so it will also be less
+                           // then int min so just return that value first
+                return sign == -1 ? INT_MIN : INT_MAX;
             }
         }
 
-        return static_cast<int>(result * sign);
+        return result * sign;
     }
 };
