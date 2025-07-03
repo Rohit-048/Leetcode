@@ -1,27 +1,22 @@
 class Solution {
 public:
     string frequencySort(string s) {
-        unordered_map<char,int> freqMap;
-        for(char c: s){
-            freqMap[c]++;
+        unordered_map<char,int> mp;
+        for(char i:s){
+            mp[i]++;
         }
+        priority_queue<pair<int,char>> pq; // max heap to always get the max element
 
-        // to sort it based on  values we will take a vector of pair and then do it
-        vector<pair<char,int>> freqVec(freqMap.begin(),freqMap.end());
-
-        // to sort based on the values given to us 
-        sort(freqVec.begin(), freqVec.end(), [](const pair<char, int>& a, const pair<char, int>& b) {
-            return a.second > b.second; // descending
-        });
-
-        // forming the result;
+        for(auto it:mp){
+            pq.push({it.second,it.first});
+        }
+        
         string result="";
-        for(auto &p:freqVec){
-            for(int i=0;i<p.second;i++){
-                result+=p.first;
-            }
+        while(!pq.empty()){
+            result+=string(pq.top().first,pq.top().second); // this uses string function < string(count, char)> where it appends the char to number of times it has occured in the t
+            pq.pop();
         }
+
         return result;
     }
 };
-
