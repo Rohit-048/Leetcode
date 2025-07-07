@@ -2,14 +2,16 @@ class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
         int n=nums.size();
-        set<int> setMap;
+        unordered_map<int,bool> mp;
         
         for(int i:nums){
-            setMap.insert(i);
+           if(i>0){
+            mp[i]=true;
+           }
         }
-       
+
         for(int i=1;i<=n+1;i++){
-            if(setMap.find(i)==setMap.end()){
+            if(!mp[i]){ // checking if we have seen this element
                 return i;
             }
             
