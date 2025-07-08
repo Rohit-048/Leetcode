@@ -15,7 +15,7 @@ public:
                 right++;
             } else {
                 setMap.erase(s[left]);
-                currLen = right - left + 1;
+                //currLen = right - left + 1;
                 left++;
             }
         }
