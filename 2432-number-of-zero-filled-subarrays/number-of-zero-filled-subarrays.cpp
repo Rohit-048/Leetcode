@@ -1,15 +1,26 @@
 class Solution {
 public:
     long long zeroFilledSubarray(vector<int>& nums) {
-        long long cnt = 0, streak = 0;
-        for (int num : nums) {
-            if (num == 0) {
-                streak++;
-                cnt += streak;
-            } else {
-                streak = 0;
+        int i=0;
+        long long result=0;
+        int count=0;
+        while(i<nums.size()){
+            if(nums[i]==0){
+                count++;
+                i++;
+                continue;
             }
+            if(count!=0){
+                result+=(long long)count*(count+1)/2;
+                count=0;
+            }
+            i++;
+        
         }
-        return cnt;
+        if(count!=0){
+                result+=(long long)count*(count+1)/2;
+                count=0;
+            }
+        return result;
     }
 };
